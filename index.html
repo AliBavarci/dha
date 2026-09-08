@@ -464,6 +464,123 @@
 
 
         /* =====================================================
+           LANGUAGE SWITCHER
+        ====================================================== */
+
+        .language-switcher {
+            position: relative;
+            flex-shrink: 0;
+            font-family:
+                "DM Mono",
+                monospace;
+            font-size: 11px;
+            letter-spacing: .06em;
+        }
+
+        .language-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 36px;
+            padding: 0 13px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 999px;
+            background: rgba(255,255,255,.045);
+            color: var(--text);
+            cursor: pointer;
+            font: inherit;
+            letter-spacing: inherit;
+            transition:
+                background .25s ease,
+                border-color .25s ease,
+                transform .25s ease;
+        }
+
+        .language-toggle:hover,
+        .language-switcher:focus-within .language-toggle {
+            background: rgba(255,255,255,.09);
+            border-color: rgba(255,255,255,.28);
+            transform: translateY(-1px);
+        }
+
+        .language-toggle .language-globe {
+            font-family: system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        .language-toggle .language-chevron {
+            font-size: 9px;
+            opacity: .65;
+            transition: transform .25s ease;
+        }
+
+        .language-switcher:hover .language-chevron,
+        .language-switcher:focus-within .language-chevron {
+            transform: rotate(180deg);
+        }
+
+        .language-menu {
+            position: absolute;
+            top: calc(100% + 9px);
+            right: 0;
+            min-width: 170px;
+            padding: 7px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 16px;
+            background: rgba(10,10,16,.94);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            box-shadow: 0 20px 50px rgba(0,0,0,.40);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px) scale(.98);
+            transform-origin: top right;
+            transition:
+                opacity .2s ease,
+                visibility .2s ease,
+                transform .2s ease;
+            z-index: 1100;
+        }
+
+        .language-switcher:hover .language-menu,
+        .language-switcher:focus-within .language-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .language-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 11px;
+            border-radius: 10px;
+            color: var(--muted);
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .language-menu a:hover,
+        .language-menu a[aria-current="page"] {
+            background: rgba(255,255,255,.07);
+            color: white;
+        }
+
+        .language-code {
+            width: 26px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .language-name {
+            font-family: "Inter", system-ui, sans-serif;
+            font-size: 12px;
+            letter-spacing: 0;
+        }
+
+        /* =====================================================
            CONTAINER
         ====================================================== */
 
@@ -2306,6 +2423,14 @@
                     none;
             }
 
+            .language-switcher {
+                margin-left: auto;
+            }
+
+            .language-menu {
+                right: 0;
+            }
+
 
             .hero-grid,
             .about-grid,
@@ -2610,6 +2735,57 @@
                 GitHub
             </a>
 
+        </div>
+
+        <!-- LANGUAGE SWITCHER -->
+        <div class="language-switcher">
+            <button
+                class="language-toggle"
+                type="button"
+                aria-label="Select website language"
+                aria-haspopup="true"
+            >
+                <span class="language-globe" aria-hidden="true">◎</span>
+                <span>EN</span>
+                <span class="language-chevron" aria-hidden="true">▼</span>
+            </button>
+
+            <div class="language-menu" role="menu" aria-label="Website languages">
+
+                <a
+                    href="https://digitalhanaarts.github.io/"
+                    role="menuitem"
+                    aria-current="page"
+                >
+                    <span class="language-code">EN</span>
+                    <span class="language-name">English</span>
+                </a>
+
+                <a
+                    href="https://digitalhanaarts.github.io/dha-per/"
+                    role="menuitem"
+                >
+                    <span class="language-code">FA</span>
+                    <span class="language-name">فارسی</span>
+                </a>
+
+                <a
+                    href="https://digitalhanaarts.github.io/it_dha/"
+                    role="menuitem"
+                >
+                    <span class="language-code">IT</span>
+                    <span class="language-name">Italiano</span>
+                </a>
+
+                <a
+                    href="https://digitalhanaarts.github.io/dha_ar/"
+                    role="menuitem"
+                >
+                    <span class="language-code">AR</span>
+                    <span class="language-name">العربية</span>
+                </a>
+
+            </div>
         </div>
 
     </nav>
