@@ -340,7 +340,7 @@
 
             align-items: center;
 
-            justify-content: space-between;
+            gap: 16px;
 
             padding:
                 10px 16px 10px 14px;
@@ -382,6 +382,8 @@
 
             letter-spacing:
                 -.02em;
+
+            margin-right: auto;   /* pushes brand left, others right */
 
         }
 
@@ -463,122 +465,225 @@
         }
 
 
-        /* =====================================================
-           LANGUAGE SWITCHER
-        ====================================================== */
+        /* ----- Language Switcher ----- */
 
-        .language-switcher {
-            position: relative;
-            flex-shrink: 0;
-            font-family:
-                "DM Mono",
-                monospace;
-            font-size: 11px;
-            letter-spacing: .06em;
-        }
+        .nav-actions {
 
-        .language-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 36px;
-            padding: 0 13px;
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 999px;
-            background: rgba(255,255,255,.045);
-            color: var(--text);
-            cursor: pointer;
-            font: inherit;
-            letter-spacing: inherit;
-            transition:
-                background .25s ease,
-                border-color .25s ease,
-                transform .25s ease;
-        }
-
-        .language-toggle:hover,
-        .language-switcher:focus-within .language-toggle {
-            background: rgba(255,255,255,.09);
-            border-color: rgba(255,255,255,.28);
-            transform: translateY(-1px);
-        }
-
-        .language-toggle .language-globe {
-            font-family: system-ui, sans-serif;
-            font-size: 14px;
-            line-height: 1;
-        }
-
-        .language-toggle .language-chevron {
-            font-size: 9px;
-            opacity: .65;
-            transition: transform .25s ease;
-        }
-
-        .language-switcher:hover .language-chevron,
-        .language-switcher:focus-within .language-chevron {
-            transform: rotate(180deg);
-        }
-
-        .language-menu {
-            position: absolute;
-            top: calc(100% + 9px);
-            right: 0;
-            min-width: 170px;
-            padding: 7px;
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 16px;
-            background: rgba(10,10,16,.94);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            box-shadow: 0 20px 50px rgba(0,0,0,.40);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-6px) scale(.98);
-            transform-origin: top right;
-            transition:
-                opacity .2s ease,
-                visibility .2s ease,
-                transform .2s ease;
-            z-index: 1100;
-        }
-
-        .language-switcher:hover .language-menu,
-        .language-switcher:focus-within .language-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .language-menu a {
             display: flex;
+
             align-items: center;
+
             gap: 10px;
-            padding: 10px 11px;
-            border-radius: 10px;
+
+            margin-left: auto;   /* push to the right */
+
+        }
+
+
+        .language-switch {
+
+            position: relative;
+
+            display: inline-block;
+
+        }
+
+
+        .lang-toggle {
+
+            position: absolute;
+
+            opacity: 0;
+
+            width: 0;
+
+            height: 0;
+
+            pointer-events: none;
+
+        }
+
+
+        .lang-button {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            cursor: pointer;
+
+            padding: 8px 12px;
+
+            border-radius: 999px;
+
+            border: 1px solid rgba(255,255,255,.12);
+
+            background: rgba(255,255,255,.04);
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 11px;
+
+            letter-spacing: .08em;
+
             color: var(--muted);
+
+            transition:
+                border-color .25s ease,
+                color .25s ease,
+                background .25s ease;
+
+            user-select: none;
+
+        }
+
+
+        .lang-button:hover {
+
+            border-color: rgba(255,255,255,.28);
+
+            color: white;
+
+            background: rgba(255,255,255,.08);
+
+        }
+
+
+        .globe-icon {
+
+            width: 15px;
+
+            height: 15px;
+
+            stroke: currentColor;
+
+        }
+
+
+        .current-lang {
+
+            font-weight: 500;
+
+        }
+
+
+        .caret {
+
+            font-size: 9px;
+
+            transform: translateY(-1px);
+
+            transition: transform .2s ease;
+
+        }
+
+
+        .lang-dropdown {
+
+            position: absolute;
+
+            top: calc(100% + 10px);
+
+            right: 0;
+
+            min-width: 160px;
+
+            background: rgba(13,13,20,.95);
+
+            border: 1px solid rgba(255,255,255,.12);
+
+            border-radius: 16px;
+
+            backdrop-filter: blur(20px);
+
+            -webkit-backdrop-filter: blur(20px);
+
+            padding: 8px;
+
+            box-shadow: 0 20px 40px rgba(0,0,0,.45);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transform: translateY(-8px);
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease,
+                visibility .25s;
+
+            z-index: 1001;
+
+        }
+
+
+        .lang-option {
+
+            display: block;
+
+            padding: 10px 14px;
+
+            font-family: "DM Mono", monospace;
+
+            font-size: 11px;
+
+            letter-spacing: .05em;
+
+            color: var(--muted);
+
+            border-radius: 10px;
+
             transition:
                 background .2s ease,
                 color .2s ease;
+
+            white-space: nowrap;
+
         }
 
-        .language-menu a:hover,
-        .language-menu a[aria-current="page"] {
-            background: rgba(255,255,255,.07);
+
+        .lang-option:hover {
+
+            background: rgba(255,255,255,.08);
+
             color: white;
+
         }
 
-        .language-code {
-            width: 26px;
-            color: var(--text);
-            font-weight: 500;
+
+        .lang-option.active {
+
+            color: white;
+
+            background: rgba(0,229,255,.12);
+
         }
 
-        .language-name {
-            font-family: "Inter", system-ui, sans-serif;
-            font-size: 12px;
-            letter-spacing: 0;
+
+        /* Show dropdown when checkbox is checked or on focus-within */
+
+        .lang-toggle:checked ~ .lang-dropdown,
+
+        .language-switch:focus-within .lang-dropdown {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform: translateY(0);
+
         }
+
+
+        .lang-toggle:checked + .lang-button .caret {
+
+            transform: translateY(-1px) rotate(180deg);
+
+        }
+
 
         /* =====================================================
            CONTAINER
@@ -2423,14 +2528,10 @@
                     none;
             }
 
-            .language-switcher {
-                margin-left: auto;
+            /* Keep language switcher visible */
+            .nav-actions {
+                margin-left: auto; /* already set, but ensure */
             }
-
-            .language-menu {
-                right: 0;
-            }
-
 
             .hero-grid,
             .about-grid,
@@ -2635,6 +2736,15 @@
 
             }
 
+            /* Adjust language switcher for smaller screens */
+            .lang-button {
+                padding: 7px 10px;
+            }
+
+            .lang-dropdown {
+                right: 0;
+                min-width: 140px;
+            }
         }
 
 
@@ -2737,55 +2847,33 @@
 
         </div>
 
-        <!-- LANGUAGE SWITCHER -->
-        <div class="language-switcher">
-            <button
-                class="language-toggle"
-                type="button"
-                aria-label="Select website language"
-                aria-haspopup="true"
-            >
-                <span class="language-globe" aria-hidden="true">◎</span>
-                <span>EN</span>
-                <span class="language-chevron" aria-hidden="true">▼</span>
-            </button>
 
-            <div class="language-menu" role="menu" aria-label="Website languages">
+        <!-- Language Switcher -->
+        <div class="nav-actions">
 
-                <a
-                    href="https://digitalhanaarts.github.io/"
-                    role="menuitem"
-                    aria-current="page"
-                >
-                    <span class="language-code">EN</span>
-                    <span class="language-name">English</span>
-                </a>
+            <div class="language-switch">
 
-                <a
-                    href="https://digitalhanaarts.github.io/dha-per/"
-                    role="menuitem"
-                >
-                    <span class="language-code">FA</span>
-                    <span class="language-name">فارسی</span>
-                </a>
+                <input type="checkbox" id="lang-toggle" class="lang-toggle" aria-label="Toggle language menu">
 
-                <a
-                    href="https://digitalhanaarts.github.io/it_dha/"
-                    role="menuitem"
-                >
-                    <span class="language-code">IT</span>
-                    <span class="language-name">Italiano</span>
-                </a>
+                <label for="lang-toggle" class="lang-button" role="button" aria-haspopup="true" aria-expanded="false">
+                    <svg class="globe-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    <span class="current-lang">EN</span>
+                    <span class="caret">▾</span>
+                </label>
 
-                <a
-                    href="https://digitalhanaarts.github.io/dha_ar/"
-                    role="menuitem"
-                >
-                    <span class="language-code">AR</span>
-                    <span class="language-name">العربية</span>
-                </a>
+                <div class="lang-dropdown" role="menu">
+                    <a href="#" class="lang-option active" role="menuitem" aria-current="page">English</a>
+                    <a href="https://digitalhanaarts.github.io/dha-per/" class="lang-option" role="menuitem">فارسی</a>
+                    <a href="https://digitalhanaarts.github.io/it_dha/" class="lang-option" role="menuitem">Italiano</a>
+                    <a href="https://digitalhanaarts.github.io/dha_ar/" class="lang-option" role="menuitem">العربية</a>
+                </div>
 
             </div>
+
         </div>
 
     </nav>
@@ -3163,8 +3251,8 @@
                 </h2>
 
 
+                <!-- First Project: DHA Vision -->
                 <div class="project">
-
 
                     <div class="project-visual">
 
@@ -3240,6 +3328,84 @@
 
                     </div>
 
+                </div>
+
+
+                <!-- Second Project: OpenSea Collection -->
+                <div class="project">
+
+                    <div class="project-visual">
+
+                        <img
+                            src="assets/opensea.io.jpeg"
+                            alt="Digital Hana Arts on OpenSea"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="project-info">
+
+                        <div class="project-tag">
+                            NFT Collection
+                        </div>
+
+
+                        <h3>
+                            OpenSea<br>
+                            Collection
+                        </h3>
+
+
+                        <p>
+
+                            Explore the official Digital Hana Arts
+                            collection on OpenSea — curated digital
+                            assets, generative artworks, and
+                            blockchain‑based creations.
+
+                        </p>
+
+
+                        <div class="tech">
+
+                            <span>
+                                NFT
+                            </span>
+
+                            <span>
+                                Ethereum
+                            </span>
+
+                            <span>
+                                Digital Art
+                            </span>
+
+                            <span>
+                                Blockchain
+                            </span>
+
+                            <span>
+                                OpenSea
+                            </span>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <a
+                            href="https://opensea.io/Digital__Hana__Arts"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="button secondary"
+                        >
+                            Visit OpenSea ↗
+                        </a>
+
+                    </div>
 
                 </div>
 
